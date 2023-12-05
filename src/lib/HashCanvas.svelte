@@ -2,16 +2,15 @@
     import { onMount } from "svelte";
     import { isWebGL2Supported, isWebGPUSupported } from "$lib/misc.js";
     import init from "$lib/init.js";
-    import type Renderer from "$lib/render/webgl2/webgl2.js";
-    import type WebGPURenderer from "$lib/render/webgpu/webgpu.js";
+    import type { Renderer } from "$lib/index.js";
 
     export let width = 400;
     export let height = 400;
 
-    export let onCreation: (renderer: Renderer | WebGPURenderer, canvas: HTMLCanvasElement) => void;
+    export let onCreation: (renderer: Renderer, canvas: HTMLCanvasElement) => void;
 
     let canvas: HTMLCanvasElement;
-    let renderer: Renderer | WebGPURenderer;
+    let renderer: Renderer;
     onMount(async () => {
         if (isWebGPUSupported()) {
             const glw = canvas.getContext("webgpu");

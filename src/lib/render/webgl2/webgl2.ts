@@ -3,7 +3,7 @@ import "webgl-lint";
 import vertexShader from "./vertex.glsl?raw";
 import fragmentShader from "./fragment.glsl?raw";
 
-export default class Renderer {
+export default class WebGL2Renderer {
     width: number
     height: number
     private readonly gl: WebGL2RenderingContext

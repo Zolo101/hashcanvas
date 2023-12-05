@@ -1,7 +1,8 @@
-import Renderer from "$lib/render/webgl2/webgl2.js";
+import WebGL2Renderer from "$lib/render/webgl2/webgl2.js";
 import WebGPURenderer from "$lib/render/webgpu/webgpu.js";
+import type { Renderer } from "$lib/index.js";
 
-export default async function init(width: number, height: number, gl2_2D: WebGL2RenderingContext | null, glw_2D: GPUCanvasContext | null): Promise<Renderer | WebGPURenderer> {
+export default async function init(width: number, height: number, gl2_2D: WebGL2RenderingContext | null, glw_2D: GPUCanvasContext | null): Promise<Renderer> {
     // console.log("webgl2:", !!gl2_2D, "webgpu:", !!glw_2D)
     if (glw_2D) {
         const adapter = await navigator.gpu?.requestAdapter();
@@ -14,7 +15,7 @@ export default async function init(width: number, height: number, gl2_2D: WebGL2
     }
 
     if (gl2_2D) {
-        return new Renderer(width, height, gl2_2D);
+        return new WebGL2Renderer(width, height, gl2_2D);
     }
 
     alert("No WebGL2 or WebGPU support!")
